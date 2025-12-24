@@ -11,8 +11,7 @@ pipeline {
         stage('Security Gate') {
             steps {
                 echo '🛡️ Scanning for Viruses...'
-                // We use our LOCAL rule file (semgrep-rules.yaml)
-                // This forces it to use the logic we just wrote
+                // Using your local rule file to catch the AWS Key
                 sh 'semgrep scan --config=semgrep-rules.yaml --error .'
             }
         }
@@ -20,8 +19,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '✅ Code is Safe. Deploying...'
-                // Copy the website file to the "Production Server"
-                sh 'cp index.html /home/prangan/Downloads/prod-server/index.html'
+                
+                // DEBUG: This lists the permissions of the destination folder so we can see if Jenkins can access it
+                sh 'ls -la /home/prangan/Downloads/prod-server/'
+                
+                // FORCE COPY: The '-f' flag forces the overwrite if the file exists
+                sh 'cp -f index.html /home/prangan/Downloads/prod-server/index.html'
             }
         }
     }

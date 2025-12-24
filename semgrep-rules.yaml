@@ -1,0 +1,7 @@
+rules:
+  - id: catch-fake-aws-key
+    patterns:
+      - pattern-regex: "AKIA[0-9A-Z]{16}"
+    message: "CRITICAL: Hardcoded AWS Secret Key detected! Deployment Blocked."
+    languages: [python, html, javascript]
+    severity: ERROR

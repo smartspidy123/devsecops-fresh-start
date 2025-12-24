@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo '✅ Code is Safe. Deploying...'
                 // Copy the website file to the "Production Server"
-                sh 'cp index.html ~/Downloads/prod-server/index.html'
+                sh 'cp index.html /home/prangan/Downloads/prod-server/index.html'
             }
         }
     }
